@@ -1,10 +1,35 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
+from openai import OpenAI
 
-if st.checkbox('Show dataframe'):
-    chart_data = pd.DataFrame(
-       np.random.randn(20, 3),
-       columns=['a', 'b', 'c'])
+key = st.secrets["API_KEY"]
+base_url = st.secrets["BASE_URL"]
+model = st.secrets["MODEL"]
 
-    chart_data
+client = OpenAI(
+  base_url,
+  key,
+)
+
+completion = client.chat.completions.create(
+  extra_body={},
+  model=model,
+  messages=[
+    {
+      "role": "user",
+      "content": [
+        {
+          "type": "text",
+          "text": "What is in this image?"
+        },
+        {
+          "type": "image_url",
+          "image_url": {
+            "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg"
+          }
+        }
+      ]
+    }
+  ]
+)
+
+st.write(completion.choices[0].message.content)

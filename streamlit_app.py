@@ -33,7 +33,7 @@ if uploaded_file is not None:
           },
           {
             "type": "input_image",
-            "image_url": f"data:image/png;base64,{data}"
+            "image_url": f"data:image/jpg;{uploaded_file}"
           }
         ]
       }

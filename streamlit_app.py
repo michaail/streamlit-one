@@ -15,8 +15,10 @@ uploaded_file = st.file_uploader("Import image", type=["jpg", "jpeg", "png"], ac
 if uploaded_file is not None:
   st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
   st.write("Image uploaded successfully!")
+  # Convert the image to base64
   bytes_data = uploaded_file.getvalue()
-  data = base64.b64encode(bytes_data)
+  base64_image = base64.b64encode(bytes_data).decode('utf-8')
+    
 
   st.write("## Image Analysis")
 
@@ -32,8 +34,10 @@ if uploaded_file is not None:
             "text": "What is in this image?"
           },
           {
-            "type": "input_image",
-            "image_url": f"data:image/jpg;{uploaded_file}"
+            "type": "image_url",
+            "image_url": {
+              "url": f"data:image/jpeg;base64,{base64_image}"
+            }
           }
         ]
       }

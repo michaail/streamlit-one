@@ -6,8 +6,8 @@ base_url = st.secrets["BASE_URL"]
 model = st.secrets["MODEL"]
 
 client = OpenAI(
-  base_url,
-  key
+  base_url=base_url,
+  api_keys=key
 )
 
 completion = client.chat.completions.create(

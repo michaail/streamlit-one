@@ -7,7 +7,7 @@ model = st.secrets["MODEL"]
 
 client = OpenAI(
   base_url,
-  key,
+  key
 )
 
 completion = client.chat.completions.create(

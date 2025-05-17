@@ -8,3 +8,4 @@ langchain_huggingface
 chromadb
 sentence_transformers
 pdfminer-six
+protobuf==3.20.*

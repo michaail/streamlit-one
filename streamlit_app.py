@@ -58,7 +58,7 @@ if uploaded_file is not None:
   # data = extract_data(uploaded_file)
   # print(data)
 
-  chunks = splitter.split_documents(text)
+  chunks = splitter.split_text(text)
   st.write("## Chunks")
   st.write(chunks)
 

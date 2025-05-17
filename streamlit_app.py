@@ -62,10 +62,10 @@ if uploaded_file is not None:
   st.write("## Chunks")
   st.write(chunks[0])
 
-  index = Chroma.from_d(documents=chunks, embedding=embeddings_model)
+  # index = Chroma.from_d(documents=chunks, embedding=embeddings_model)
 
-  st.write("## Index")
-  st.write(index)
+  # st.write("## Index")
+  # st.write(index)
 
   # Create retriever
   # retriever = vector_index.as_retriever()

@@ -56,7 +56,8 @@ def save_to_chroma(chunks):
 
   # Persist the database to disk
   db.persist()
-  print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")
+  st.write("## Index")
+  st.write(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")
 
 with st.sidebar:
   uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
@@ -73,6 +74,5 @@ if uploaded_file is not None:
 
   save_to_chroma(chunks)
 
-  st.write("## Index")
-  # st.write(index)
+  
 

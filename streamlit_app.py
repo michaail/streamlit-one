@@ -11,7 +11,7 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 # from langchain.chains.rephrase_history_chain import RephraseHistoryChain
 from langchain_community.vectorstores import Chroma
 import pdfminer
-from pdfminer.high_level import extract_pages
+from pdfminer.high_level import extract_text
 
 
 
@@ -54,9 +54,8 @@ with st.sidebar:
 
 
 if uploaded_file is not None:
-  for page_layout in extract_pages(uploaded_file):
-    for element in page_layout:
-      st.write(element)
+  for text in extract_text(uploaded_file):
+    st.write(text)
   # data = extract_data(uploaded_file)
   # print(data)
 

@@ -60,11 +60,12 @@ if uploaded_file is not None:
 
   chunks = splitter.split_text(text)
   st.write("## Chunks")
-  st.write(chunks)
+  # st.write(chunks)
 
-  # index = Chroma.from_documents(documents=chunks, embedding=embeddings_model)
+  index = Chroma.from_documents(documents=chunks, embedding=embeddings_model)
 
-  
+  st.write("## Index")
+  st.write(index)
 
   # Create retriever
   # retriever = vector_index.as_retriever()

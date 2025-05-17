@@ -5,10 +5,10 @@ import pdfplumber
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
-from langchain.document_stores.local_file import LocalFileStore
-from langchain.document_stores.faiss import FAISS
-from langchain.retrievers import CacheBackedEmbeddings
-from langchain.chains.rephrase_history_chain import RephraseHistoryChain
+# from langchain.document_stores.local_file import LocalFileStore
+# from langchain.document_stores.faiss import FAISS
+# from langchain.retrievers import CacheBackedEmbeddings
+# from langchain.chains.rephrase_history_chain import RephraseHistoryChain
 from langchain_community.vectorstores import Chroma
 
 
@@ -25,7 +25,7 @@ client = OpenAI(
 
 splitter = RecursiveCharacterTextSplitter(chunk_size=300, chunk_overlap=50)
 
-store = LocalFileStore("./cache/")
+# store = LocalFileStore("./cache/")
 
 # Specify embedding model
 embed_model_id = 'intfloat/e5-small-v2'
@@ -34,7 +34,7 @@ model_kwargs = {"device": "cpu", "trust_remote_code": True}
 embeddings_model = HuggingFaceEmbeddings(model_name=embed_model_id, model_kwargs=model_kwargs)
 
 # Create embeddings cache
-embedder = CacheBackedEmbeddings.from_bytes_store(embeddings_model, store, namespace=embed_model_id)
+# embedder = CacheBackedEmbeddings.from_bytes_store(embeddings_model, store, namespace=embed_model_id)
 
 
 def extract_data(feed):

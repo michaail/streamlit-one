@@ -3,7 +3,6 @@ from openai import OpenAI
 import base64
 import pdfplumber
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain.document_stores.local_file import LocalFileStore

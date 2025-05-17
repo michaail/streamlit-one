@@ -54,8 +54,8 @@ with st.sidebar:
 
 
 if uploaded_file is not None:
-  for text in extract_text(uploaded_file):
-    st.write(text)
+  text = extract_text(uploaded_file)
+  st.write(text)
   # data = extract_data(uploaded_file)
   # print(data)
 

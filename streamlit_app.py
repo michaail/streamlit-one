@@ -9,6 +9,9 @@ import pdfminer
 from pdfminer.high_level import extract_text
 import os
 import shutil
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
 
 
 key = st.secrets["API_KEY"]

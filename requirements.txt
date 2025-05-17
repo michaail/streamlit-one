@@ -4,6 +4,7 @@ numpy
 openai
 langchain
 langchain_community
+langchain_huggingface
 chromadb
 sentence_transformers
 pdfminer-six

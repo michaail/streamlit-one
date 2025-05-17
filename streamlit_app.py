@@ -1,7 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 import base64
-import pdfplumber
+# import pdfplumber
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 from langchain.embeddings.huggingface import HuggingFaceEmbeddings
@@ -10,6 +10,8 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 # from langchain.retrievers import CacheBackedEmbeddings
 # from langchain.chains.rephrase_history_chain import RephraseHistoryChain
 from langchain_community.vectorstores import Chroma
+import pdfminer
+from pdfminer.high_level import extract_pages
 
 
 
@@ -36,14 +38,15 @@ embeddings_model = HuggingFaceEmbeddings(model_name=embed_model_id, model_kwargs
 # Create embeddings cache
 # embedder = CacheBackedEmbeddings.from_bytes_store(embeddings_model, store, namespace=embed_model_id)
 
+    
 
-def extract_data(feed):
-  data = []
-  with pdfplumber.open(feed) as pdf:
-    pages = pdf.pages
-    for p in pages:
-      data.append(p.extract_text_simple())
-  return None # build more code to return a dataframe 
+# def extract_data(feed):
+#   data = []
+#   with pdfplumber.open(feed) as pdf:
+#     pages = pdf.pages
+#     for p in pages:
+#       data.append(p.extract_text_simple())
+#   return None # build more code to return a dataframe 
 
 
 with st.sidebar:
@@ -51,12 +54,15 @@ with st.sidebar:
 
 
 if uploaded_file is not None:
-  data = extract_data(uploaded_file)
-  print(data)
+  for page_layout in extract_pages(uploaded_file):
+    for element in page_layout:
+      st.write(element)
+  # data = extract_data(uploaded_file)
+  # print(data)
 
-  chunks = splitter.split_documents(data)
+  # chunks = splitter.split_documents(data)
 
-  index = Chroma.from_documents(documents=chunks, embedding=embeddings_model)
+  # index = Chroma.from_documents(documents=chunks, embedding=embeddings_model)
 
   
 

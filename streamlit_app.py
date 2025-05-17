@@ -38,12 +38,12 @@ embeddings_model = HuggingFaceEmbeddings(model_name=embed_model_id, model_kwargs
 
 
 def extract_data(feed):
-    data = []
-    with pdfplumber.open(feed) as pdf:
-        pages = pdf.pages
-        for p in pages:
-            data.append(p.extract_text_simple())
-    return None # build more code to return a dataframe 
+  data = []
+  with pdfplumber.open(feed) as pdf:
+    pages = pdf.pages
+    for p in pages:
+      data.append(p.extract_text_simple())
+  return None # build more code to return a dataframe 
 
 
 with st.sidebar:
@@ -52,6 +52,8 @@ with st.sidebar:
 
 if uploaded_file is not None:
   data = extract_data(uploaded_file)
+  print(data)
+
   chunks = splitter.split_documents(data)
 
   index = Chroma.from_documents(documents=chunks, embedding=embeddings_model)

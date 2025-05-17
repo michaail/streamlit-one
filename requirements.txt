@@ -3,3 +3,6 @@ pandas
 numpy
 openai
 pdfplumber
+langchain
+langchain_community
+chromadb

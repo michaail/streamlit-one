@@ -55,11 +55,12 @@ with st.sidebar:
 
 if uploaded_file is not None:
   text = extract_text(uploaded_file)
-  st.write(text)
   # data = extract_data(uploaded_file)
   # print(data)
 
-  # chunks = splitter.split_documents(data)
+  chunks = splitter.split_documents(text)
+  st.write("## Chunks")
+  st.write(chunks)
 
   # index = Chroma.from_documents(documents=chunks, embedding=embeddings_model)
 

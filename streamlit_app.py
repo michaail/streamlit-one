@@ -12,8 +12,8 @@ from langchain.embeddings.huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 import pdfminer
 from pdfminer.high_level import extract_text
-
-
+import os
+import shutil
 
 
 key = st.secrets["API_KEY"]
@@ -48,6 +48,33 @@ embeddings_model = HuggingFaceEmbeddings(model_name=embed_model_id, model_kwargs
 #       data.append(p.extract_text_simple())
 #   return None # build more code to return a dataframe 
 
+# Path to the directory to save Chroma database
+CHROMA_PATH = "chroma"
+def save_to_chroma(chunks):
+  """
+  Save the given list of Document objects to a Chroma database.
+  Args:
+  chunks (list[Document]): List of Document objects representing text chunks to save.
+  Returns:
+  None
+  """
+
+  # Clear out the existing database directory if it exists
+  if os.path.exists(CHROMA_PATH):
+    shutil.rmtree(CHROMA_PATH)
+
+  # Create a new Chroma database from the documents using OpenAI embeddings
+  db = Chroma.from_documents(
+    chunks,
+    embeddings_model,
+    persist_directory=CHROMA_PATH
+  )
+
+  # Persist the database to disk
+  db.persist()
+  print(f"Saved {len(chunks)} chunks to {CHROMA_PATH}.")
+
+
 
 with st.sidebar:
   uploaded_file = st.file_uploader('Choose your .pdf file', type="pdf")
@@ -62,9 +89,9 @@ if uploaded_file is not None:
   st.write("## Chunks")
   st.write(chunks[0])
 
-  # index = Chroma.from_d(documents=chunks, embedding=embeddings_model)
+  save_to_chroma(chunks)
 
-  # st.write("## Index")
+  st.write("## Index")
   # st.write(index)
 
   # Create retriever
@@ -103,4 +130,3 @@ if uploaded_file is not None:
   #   ]
   # )
 
-  st.write("Application")
